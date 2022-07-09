@@ -41,7 +41,7 @@ function OnDeath()
             else
                 NetworkResurrectLocalPlayer(pos.x, pos.y, pos.z + 0.5, heading, true, false)
             end
-			
+
             SetEntityInvincible(player, true)
             SetEntityHealth(player, GetEntityMaxHealth(player))
             if IsPedInAnyVehicle(player, false) then
@@ -80,7 +80,7 @@ function DeathTimer()
     end
 end
 
-local function DrawTxt(x, y, width, height, scale, text, r, g, b, a, outline)
+local function DrawTxt(x, y, width, height, scale, text, r, g, b, a, _)
     SetTextFont(4)
     SetTextProportional(0)
     SetTextScale(scale, scale)
@@ -94,48 +94,39 @@ local function DrawTxt(x, y, width, height, scale, text, r, g, b, a, outline)
     DrawText(x - width/2, y - height/2 + 0.005)
 end
 
--- Threads
+-- Damage Handler
 
-CreateThread(function()
-	while true do
-		Wait(10)
-		local player = PlayerId()
-		if NetworkIsPlayerActive(player) then
-            local playerPed = PlayerPedId()
-            if IsEntityDead(playerPed) and not InLaststand then
+AddEventHandler('gameEventTriggered', function(event, data)
+    if event == "CEventNetworkEntityDamage" then
+        local victim, attacker, victimDied, weapon = data[1], data[2], data[4], data[7]
+        if not IsEntityAPed(victim) then return end
+        if victimDied and NetworkGetPlayerIndexFromPed(victim) == PlayerId() and IsEntityDead(PlayerPedId()) then
+            if not InLaststand then
                 SetLaststand(true)
-            elseif IsEntityDead(playerPed) and InLaststand and not isDead then
+            elseif InLaststand and not isDead then
                 SetLaststand(false)
-                local killer_2, killerWeapon = NetworkGetEntityKillerOfPlayer(player)
-                local killer = GetPedSourceOfDeath(playerPed)
-
-                if killer_2 ~= 0 and killer_2 ~= -1 then
-                    killer = killer_2
-                end
-
-                local killerId = NetworkGetPlayerIndexFromPed(killer)
-                local killerName = killerId ~= -1 and GetPlayerName(killerId) .. " " .. "("..GetPlayerServerId(killerId)..")" or Lang:t('info.self_death')
-                local weaponLabel = Lang:t('info.wep_unknown')
-                local weaponName = Lang:t('info.wep_unknown')
-                local weaponItem = QBCore.Shared.Weapons[killerWeapon]
-                if weaponItem then
-                    weaponLabel = weaponItem.label
-                    weaponName = weaponItem.name
-                end
-                TriggerServerEvent("qb-log:server:CreateLog", "death", Lang:t('logs.death_log_title', {playername = GetPlayerName(-1), playerid = GetPlayerServerId(player)}), "red", Lang:t('logs.death_log_message', {killername = killerName, playername = GetPlayerName(player), weaponlabel = weaponLabel, weaponname = weaponName}))
+                local playerid = NetworkGetPlayerIndexFromPed(victim)
+                local playerName = GetPlayerName(playerid) .. " " .. "("..GetPlayerServerId(playerid)..")" or Lang:t('info.self_death')
+                local killerId = NetworkGetPlayerIndexFromPed(attacker)
+                local killerName = GetPlayerName(killerId) .. " " .. "("..GetPlayerServerId(killerId)..")" or Lang:t('info.self_death')
+                local weaponLabel = QBCore.Shared.Weapons[weapon].label or 'Unknown'
+                local weaponName = QBCore.Shared.Weapons[weapon].name or 'Unknown'
+                TriggerServerEvent("qb-log:server:CreateLog", "death", Lang:t('logs.death_log_title', {playername = playerName, playerid = GetPlayerServerId(playerid)}), "red", Lang:t('logs.death_log_message', {killername = killerName, playername = playerName, weaponlabel = weaponLabel, weaponname = weaponName}))
                 deathTime = Config.DeathTime
                 OnDeath()
                 DeathTimer()
             end
-		end
-	end
+        end
+    end
 end)
+
+-- Threads
 
 emsNotified = false
 
 CreateThread(function()
 	while true do
-        sleep = 1000
+        local sleep = 1000
 		if isDead or InLaststand then
             sleep = 5
             local ped = PlayerPedId()
@@ -155,9 +146,9 @@ CreateThread(function()
             if isDead then
                 if not isInHospitalBed then
                     if deathTime > 0 then
-                        DrawTxt(0.94, 1.38, 1.0, 1.0, 0.6, Lang:t('info.respawn_txt', {deathtime = math.ceil(deathTime)}), 255, 255, 255, 255)
+                        DrawTxt(0.93, 1.44, 1.0,1.0,0.6, Lang:t('info.respawn_txt', {deathtime = math.ceil(deathTime)}), 255, 255, 255, 255)
                     else
-                        DrawTxt(0.865, 1.38, 1.0, 1.0, 0.6, Lang:t('info.respawn_revive', {holdtime = hold, cost = Config.BillCost}), 255, 255, 255, 255)
+                        DrawTxt(0.865, 1.44, 1.0, 1.0, 0.6, Lang:t('info.respawn_revive', {holdtime = hold, cost = Config.BillCost}), 255, 255, 255, 255)
                     end
                 end
 
@@ -185,13 +176,13 @@ CreateThread(function()
                 sleep = 5
 
                 if LaststandTime > Laststand.MinimumRevive then
-                    DrawTxt(0.92, 1.38, 1.0, 1.0, 0.6, Lang:t('info.bleed_out', {time = math.ceil(LaststandTime)}), 255, 255, 255, 255)
+                    DrawTxt(0.94, 1.44, 1.0, 1.0, 0.6, Lang:t('info.bleed_out', {time = math.ceil(LaststandTime)}), 255, 255, 255, 255)
                 else
-                    DrawTxt(0.880, 1.38, 1.0, 1.0, 0.6, Lang:t('info.bleed_out_help', {time = math.ceil(LaststandTime)}), 255, 255, 255, 255)
+                    DrawTxt(0.845, 1.44, 1.0, 1.0, 0.6, Lang:t('info.bleed_out_help', {time = math.ceil(LaststandTime)}), 255, 255, 255, 255)
                     if not emsNotified then
-                        DrawTxt(0.92, 1.38, 1.0, 1.0, 0.6, Lang:t('info.request_help'), 255, 255, 255, 255)
+                        DrawTxt(0.91, 1.40, 1.0, 1.0, 0.6, Lang:t('info.request_help'), 255, 255, 255, 255)
                     else
-                        DrawTxt(0.92, 1.38, 1.0, 1.0, 0.6, Lang:t('info.help_requested'), 255, 255, 255, 255)
+                        DrawTxt(0.90, 1.40, 1.0, 1.0, 0.6, Lang:t('info.help_requested'), 255, 255, 255, 255)
                     end
 
                     if IsControlJustPressed(0, 47) and not emsNotified then

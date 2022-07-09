@@ -74,7 +74,7 @@ local Translations = {
     },
     menu = {
         amb_vehicles = 'Ambulance Vehicles',
-        status = 'Heath Status',
+        status = 'Health Status',
         close = '⬅ Close Menu',
     },
     text = {
@@ -86,7 +86,7 @@ local Translations = {
         armory_button = '[E] - Armory',
         armory = 'Armory',
         veh_button = '[E] - Grab / Store Vehicle',
-        heli_button = '[E] - Grab / Take Helicopter',
+        heli_button = '[E] - Grab / Store Helicopter',
         elevator_roof = '[E] - Take the elevator to the roof',
         elevator_main = '[E] - Take the elevator down',
         bed_out = '[E] - To get out of bed..',
