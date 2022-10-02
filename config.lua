@@ -1,7 +1,6 @@
 Config = {}
 Config.UseTarget = GetConvar('UseTarget', 'false') == 'true' -- Use qb-target interactions (don't change this, go to your server.cfg and add setr UseTarget true)
-Config.MinimalDoctors = 2 -- How many players with the ambulance job to prevent the hospital check-in system from being used
-Config.DocCooldown = 1 -- Cooldown between doctor calls allowed, in minutes
+Config.MinimalDoctors = 2000 -- How many players with the ambulance job to prevent the hospital check-in system from being used
 Config.WipeInventoryOnRespawn = true -- Enable or disable removing all the players items when they respawn at the hospital
 Config.Helicopter = "nhsmav" -- Helicopter model that players with the ambulance job can use
 Config.BillCost = 0 -- Price that players are charged for using the hospital check-in system
@@ -37,7 +36,7 @@ Config.Locations = { -- Edit the various interaction points for players or creat
     ["checking"] = {
 	    [1] = vector3(308.19, -595.35, 43.29), -- pillbox upstairs
 	    [2] = vector3(-254.54, 6331.78, 32.43), -- paleto
-	    [3] = vector3(1777.91, 2555.12, 45.8), -- prison?
+	    [3] = vector3(1769.02, 2571.05, 45.73), -- prison?
         [4] = vector3(350.47, -587.64, 28.42) -- downstairs pillbox
     },
     ["duty"] = {
@@ -70,25 +69,19 @@ Config.Locations = { -- Edit the various interaction points for players or creat
         [2] = {coords = vector4(313.96, -579.05, 43.53, 164.5), taken = false, model = 1631638868},
         [3] = {coords = vector4(314.58, -584.09, 43.53, 335.65), taken = false, model = 1631638868},
         [4] = {coords = vector4(317.74, -585.29, 43.53, 335.65), taken = false, model = 1631638868},
-        [5] = {coords = vector4(319.47, -581.04, 43.53, 164.5), taken = false, model = 1631638868}, 
-        [6] = {coords = vector4(366.43, -581.54, 43.28, 66.5), taken = false, model = 1631638868}, 
+        [5] = {coords = vector4(319.47, -581.04, 43.53, 164.5), taken = false, model = 1631638868} 
+--[[    [6] = {coords = vector4(366.43, -581.54, 43.28, 66.5), taken = false, model = 1631638868}, 
         [7] = {coords = vector4(364.93, -585.86, 43.28, 67.5), taken = false, model = 1631638868}, 
         [8] = {coords = vector4(363.82, -589.09, 43.28, 68.5), taken = false, model = 1631638868},
---[[ 	--- paleto
+ 	--- paleto
 	    [9] = {coords = vector4(-252.43, 6312.25, 32.34, 313.48), taken = false, model = 2117668672},
         [10] = {coords = vector4(-247.04, 6317.95, 32.34, 134.64), taken = false, model = 2117668672},
         [11] = {coords = vector4(-255.98, 6315.67, 32.34, 313.91), taken = false, model = 2117668672}, ]]
     },
     ["jailbeds"] = {
-        [1] = {coords = vector4(1777.74, 2559.06, 45.35, 268.84), taken = false, model = 2117668672},
-        [2] = {coords = vector4(1761.96, 2591.51, 45.66, 269.8), taken = false, model = 2117668672},
-        [3] = {coords = vector4(1771.8, 2598.02, 45.66, 89.05), taken = false, model = 2117668672},
-        [4] = {coords = vector4(1771.85, 2591.85, 45.66, 91.51), taken = false, model = 2117668672},
-    },
-    ["jailbeds"] = {
-        [1] = {coords = vector4(1761.96, 2597.74, 45.66, 270.14), taken = false, model = 2117668672},
-        [2] = {coords = vector4(1761.96, 2591.51, 45.66, 269.8), taken = false, model = 2117668672},
-        [3] = {coords = vector4(1771.8, 2598.02, 45.66, 89.05), taken = false, model = 2117668672},
+        [1] = {coords = vector4(1762.09, 2591.5, 45.6, 90.49), taken = false, model = 2117668672},
+        [2] = {coords = vector4(1762.21, 2594.62, 45.6, 90.49), taken = false, model = 2117668672},
+        [3] = {coords = vector4(1762.19, 2597.68, 45.6, 90.49), taken = false, model = 2117668672},
         [4] = {coords = vector4(1771.85, 2591.85, 45.66, 91.51), taken = false, model = 2117668672},
     },
     ["stations"] = {
