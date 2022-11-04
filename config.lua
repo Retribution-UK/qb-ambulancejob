@@ -34,42 +34,44 @@ Config.AlertShowInfo = 2 -- How many injuries a player must have before being al
 
 Config.Locations = { -- Edit the various interaction points for players or create new ones
     ["checking"] = {
-	    [1] = vector3(308.19, -595.35, 43.29), -- pillbox upstairs
-	    [2] = vector3(-254.54, 6331.78, 32.43), -- paleto
+	    [1] = vector3(-437.8, -340.6, 34.71), -- pillbox upstairs
+	    --[2] = vector3(-254.54, 6331.78, 32.43), -- paleto
 	    [3] = vector3(1769.02, 2571.05, 45.73), -- prison?
-        [4] = vector3(350.47, -587.64, 28.42) -- downstairs pillbox
+        --[4] = vector3(350.47, -587.64, 28.42) -- downstairs pillbox
     },
     ["duty"] = {
-        [1] = vector3(310.2, -597.65, 43.29),
-        [2] = vector3(-254.88, 6324.5, 32.58),
+        [1] = vector3(-431.94, -342.97, 35.75),
+        --[2] = vector3(-254.88, 6324.5, 32.58),
     },
     ["vehicle"] = {
-        [1] = vector4(294.578, -574.761, 43.179, 35.79),
-        [2] = vector4(-234.28, 6329.16, 32.15, 222.5),
+        [1] = vector4(-460.24, -273.85, 35.78, 23.41),
+        --[2] = vector4(-234.28, 6329.16, 32.15, 222.5),
     },
     ["helicopter"] = {
-        [1] = vector4(351.58, -587.45, 74.16, 160.5),
-        [2] = vector4(-475.43, 5988.353, 31.716, 31.34),
+        [1] = vector4(-451.0, -304.31, 78.17, 21.6),
+        --[2] = vector4(-475.43, 5988.353, 31.716, 31.34),
     },
     ["armory"] = {
-        [1] = vector3(306.79, -601.81, 43.28),
-        [2] = vector3(-245.13, 6315.71, 32.82),
+        [1] = vector3(-436.13, -338.92, 34.16),
+        --[2] = vector3(-245.13, 6315.71, 32.82),
     },
     ["roof"] = {
-        [1] = vector4(338.5, -583.85, 74.16, 245.5),
+        [1] = vector4(-432.73, -339.46, 34.49, 347.49),
     },
     ["main"] = {
-        [1] = vector3(327.25, -603.52, 43.28),
+        [1] = vector3(-443.93, -332.72, 78.17),
     },
     ["stash"] = {
-        [1] = vector3(337.71, -595.77, 43.28),
+        [1] = vector3(-432.37, -345.21, 34.51),
     },
     ["beds"] = {
-        [1] = {coords = vector4(311.13, -582.89, 43.53, 335.65), taken = false, model = 1631638868},
-        [2] = {coords = vector4(313.96, -579.05, 43.53, 164.5), taken = false, model = 1631638868},
-        [3] = {coords = vector4(314.58, -584.09, 43.53, 335.65), taken = false, model = 1631638868},
-        [4] = {coords = vector4(317.74, -585.29, 43.53, 335.65), taken = false, model = 1631638868},
-        [5] = {coords = vector4(319.47, -581.04, 43.53, 164.5), taken = false, model = 1631638868} 
+        [1] = {coords = vector4(-459.89, -304.65, 35.44, 287.8), taken = false, model = 2117668672},
+        [2] = {coords = vector4(-461.22, -301.7, 35.44, 296.92), taken = false, model = 2117668672},
+        [3] = {coords = vector4(-454.42, -298.78, 35.44, 115.46), taken = false, model = 2117668672},
+        [4] = {coords = vector4(-455.58, -295.94, 35.44, 117.2), taken = false, model = 2117668672},
+        [6] = {coords = vector4(-463.66, -296.28, 35.44, 293.31), taken = false, model = 2117668672}, 
+        [7] = {coords = vector4(-462.46, -299.04, 35.44, 294.26), taken = false, model = 2117668672}, 
+        [8] = {coords = vector4(-456.46, -293.22, 35.44, 106.76), taken = false, model = 2117668672},
 --[[    [6] = {coords = vector4(366.43, -581.54, 43.28, 66.5), taken = false, model = 1631638868}, 
         [7] = {coords = vector4(364.93, -585.86, 43.28, 67.5), taken = false, model = 1631638868}, 
         [8] = {coords = vector4(363.82, -589.09, 43.28, 68.5), taken = false, model = 1631638868},
@@ -85,7 +87,7 @@ Config.Locations = { -- Edit the various interaction points for players or creat
         [4] = {coords = vector4(1771.85, 2591.85, 45.66, 91.51), taken = false, model = 2117668672},
     },
     ["stations"] = {
-        [1] = {label = Lang:t('info.pb_hospital'), coords = vector4(304.27, -600.33, 43.28, 272.249)}
+        [1] = {label = Lang:t('info.pb_hospital'), coords = vector4(-442.14, -342.02, 34.5, 76.84)}
     }
 }
 
